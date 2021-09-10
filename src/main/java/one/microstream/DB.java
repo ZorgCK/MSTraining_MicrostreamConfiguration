@@ -49,11 +49,12 @@ public class DB
 		// @formatter:off
 		
 		storageManager_3 = EmbeddedStorageConfiguration.Builder()
-			.setStorageDirectoryInUserHome("builderStorage")
+			.setStorageDirectory("builderStorage")
 			.setBackupDirectory("builderStorage/backup")
 			.setChannelCount(4)
 			.createEmbeddedStorageFoundation()
-			.createEmbeddedStorageManager();
+			.setRoot(root_3)
+			.createEmbeddedStorageManager().start();
 
 		// @formatter:on 
 	}
@@ -77,7 +78,8 @@ public class DB
 					))
 					.createConfiguration()
 			)
-			.createEmbeddedStorageManager();
+			.setRoot(root_4)
+			.createEmbeddedStorageManager().start();
 		
 		// @formatter:on 
 	}
