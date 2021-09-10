@@ -1,12 +1,20 @@
 package one.microstream;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import io.micronaut.core.io.ResourceResolver;
 import io.micronaut.core.io.scan.ClassPathResourceLoader;
+import one.microstream.afs.nio.types.NioFileSystem;
 import one.microstream.storage.embedded.configuration.types.EmbeddedStorageConfiguration;
+import one.microstream.storage.embedded.types.EmbeddedStorage;
+import one.microstream.storage.embedded.types.EmbeddedStorageFoundation;
 import one.microstream.storage.embedded.types.EmbeddedStorageManager;
+import one.microstream.storage.types.Storage;
+import one.microstream.storage.types.StorageBackupSetup;
+import one.microstream.storage.types.StorageChannelCountProvider;
+import one.microstream.storage.types.StorageConfiguration;
 
 
 public class DB
@@ -17,6 +25,8 @@ public class DB
 	public final static DataRoot			root_2	= new DataRoot();
 	public static EmbeddedStorageManager	storageManager_3;
 	public final static DataRoot			root_3	= new DataRoot();
+	public static EmbeddedStorageManager	storageManager_4;
+	public final static DataRoot			root_4	= new DataRoot();
 	
 	public static void initializeXMLStorage()
 	{
@@ -27,19 +37,55 @@ public class DB
 			resource.get().getPath()).createEmbeddedStorageFoundation().createEmbeddedStorageManager(root_1).start();
 	}
 	
+	public static void initializeShortStorage()
+	{
+		storageManager_2 = EmbeddedStorage.start(
+			root_2,
+			Paths.get("shortStorage"));
+	}
+	
 	public static void initializeBuilderStorage()
 	{
+		// @formatter:off
 		
+		storageManager_3 = EmbeddedStorageConfiguration.Builder()
+			.setStorageDirectoryInUserHome("builderStorage")
+			.setBackupDirectory("builderStorage/backup")
+			.setChannelCount(4)
+			.createEmbeddedStorageFoundation()
+			.createEmbeddedStorageManager();
+
+		// @formatter:on 
 	}
 	
 	public static void initializeFoundationStorage()
 	{
+		// @formatter:off
 		
+		NioFileSystem          fileSystem     = NioFileSystem.New();
+		storageManager_4 = EmbeddedStorageFoundation.New()
+			.setConfiguration(
+				StorageConfiguration.Builder()
+					.setStorageFileProvider(
+						Storage.FileProviderBuilder(fileSystem)
+							.setDirectory(fileSystem.ensureDirectoryPath("foundationStorage"))
+							.createFileProvider()
+					)
+					.setChannelCountProvider(StorageChannelCountProvider.New(4))
+					.setBackupSetup(StorageBackupSetup.New(
+						fileSystem.ensureDirectoryPath("foundationStorage/backupDir")
+					))
+					.createConfiguration()
+			)
+			.createEmbeddedStorageManager();
+		
+		// @formatter:on 
 	}
 	
 	static
 	{
 		initializeXMLStorage();
+		initializeShortStorage();
 		initializeBuilderStorage();
 		initializeFoundationStorage();
 	}
