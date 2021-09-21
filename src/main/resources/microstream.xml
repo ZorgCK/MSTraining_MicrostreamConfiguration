@@ -1,9 +1,6 @@
 <properties>
     <property name="storage-directory" value ="data" />
-    <property name="channel-count" value ="2" />
     
-    <property name="channel-directory-prefix" value ="ck_storage_channel" />
-    <property name="data-file-prefix" value ="ck_datafile_" />
-    <property name="transaction-file-prefix" value ="ck_translog_" />
-    <property name="type-dictionary-file-name" value ="ck_type_dictionary" />
+    <property name="housekeeping-interval" value ="1000000" />
+    <property name="housekeeping-time-budget" value ="50000" />
 </properties>
