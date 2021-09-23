@@ -1,6 +1,6 @@
 <properties>
     <property name="storage-directory" value ="data" />
     
-    <property name="housekeeping-interval" value ="1000000" />
-    <property name="housekeeping-time-budget" value ="50000" />
+<!--     <property name="housekeeping-interval" value ="500ms" /> -->
+<!--     <property name="housekeeping-time-budget" value ="50ms" /> -->
 </properties>
