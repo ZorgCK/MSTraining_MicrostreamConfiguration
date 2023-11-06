@@ -28,6 +28,13 @@ public class DB
 	public static EmbeddedStorageManager	storageManager_4;
 	public final static DataRoot			root_4	= new DataRoot();
 	
+	public static void initializeShortStorage()
+	{
+		storageManager_2 = EmbeddedStorage.start(
+			root_2,
+			Paths.get("shortStorage"));
+	}
+	
 	public static void initializeXMLStorage()
 	{
 		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
@@ -37,12 +44,6 @@ public class DB
 			resource.get().getPath()).createEmbeddedStorageFoundation().createEmbeddedStorageManager(root_1).start();
 	}
 	
-	public static void initializeShortStorage()
-	{
-		storageManager_2 = EmbeddedStorage.start(
-			root_2,
-			Paths.get("shortStorage"));
-	}
 	
 	public static void initializeBuilderStorage()
 	{
