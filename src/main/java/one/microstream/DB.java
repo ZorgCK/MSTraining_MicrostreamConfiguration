@@ -1,10 +1,5 @@
 package one.microstream;
 
-import java.net.URL;
-import java.util.Optional;
-
-import io.micronaut.core.io.ResourceResolver;
-import io.micronaut.core.io.scan.ClassPathResourceLoader;
 import one.microstream.storage.embedded.types.EmbeddedStorageManager;
 
 
@@ -16,26 +11,36 @@ public class DB
 	public final static DataRoot			root_2	= new DataRoot();
 	public static EmbeddedStorageManager	storageManager_3;
 	public final static DataRoot			root_3	= new DataRoot();
+	public static EmbeddedStorageManager	storageManager_4;
+	public final static DataRoot			root_4	= new DataRoot();
+	
+	public static void initializeShortStorage()
+	{
+		
+	}
 	
 	public static void initializeXMLStorage()
 	{
-		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
-		Optional<URL> resource = loader.getResource("microstream.xml");
 
 	}
 	
 	public static void initializeBuilderStorage()
 	{
+		// @formatter:off
 		
+		// @formatter:on 
 	}
 	
 	public static void initializeFoundationStorage()
 	{
-		
+		// @formatter:off
+				
+		// @formatter:on 
 	}
 	
 	static
 	{
+		initializeShortStorage();
 		initializeXMLStorage();
 		initializeBuilderStorage();
 		initializeFoundationStorage();
