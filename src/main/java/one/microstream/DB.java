@@ -30,8 +30,8 @@ public class DB
 	
 	public static void initializeShortStorage()
 	{
-		storageManager_2 = EmbeddedStorage.start(
-			root_2,
+		storageManager_1 = EmbeddedStorage.start(
+			root_1,
 			Paths.get("shortStorage"));
 	}
 	
@@ -40,8 +40,8 @@ public class DB
 		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
 		Optional<URL> resource = loader.getResource("microstream.xml");
 		
-		storageManager_1 = EmbeddedStorageConfiguration.load(
-			resource.get().getPath()).createEmbeddedStorageFoundation().createEmbeddedStorageManager(root_1).start();
+		storageManager_2 = EmbeddedStorageConfiguration.load(
+			resource.get().getPath()).createEmbeddedStorageFoundation().createEmbeddedStorageManager(root_2).start();
 	}
 	
 	
