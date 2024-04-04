@@ -4,17 +4,18 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+import org.eclipse.store.afs.nio.types.NioFileSystem;
+import org.eclipse.store.storage.embedded.configuration.types.EmbeddedStorageConfiguration;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorage;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageFoundation;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
+import org.eclipse.store.storage.types.Storage;
+import org.eclipse.store.storage.types.StorageBackupSetup;
+import org.eclipse.store.storage.types.StorageChannelCountProvider;
+import org.eclipse.store.storage.types.StorageConfiguration;
+
 import io.micronaut.core.io.ResourceResolver;
 import io.micronaut.core.io.scan.ClassPathResourceLoader;
-import one.microstream.afs.nio.types.NioFileSystem;
-import one.microstream.storage.embedded.configuration.types.EmbeddedStorageConfiguration;
-import one.microstream.storage.embedded.types.EmbeddedStorage;
-import one.microstream.storage.embedded.types.EmbeddedStorageFoundation;
-import one.microstream.storage.embedded.types.EmbeddedStorageManager;
-import one.microstream.storage.types.Storage;
-import one.microstream.storage.types.StorageBackupSetup;
-import one.microstream.storage.types.StorageChannelCountProvider;
-import one.microstream.storage.types.StorageConfiguration;
 
 
 public class DB
