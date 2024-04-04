@@ -82,14 +82,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>one.microstream</groupId>
-			<artifactId>microstream-storage-embedded</artifactId>
-			<version>08.00.00-MS-GA</version>
+			<groupId>org.eclipse.store</groupId>
+			<artifactId>storage-embedded</artifactId>
+			<version>1.3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>one.microstream</groupId>
-			<artifactId>microstream-storage-embedded-configuration</artifactId>
-			<version>08.00.00-MS-GA</version>
+			<groupId>org.eclipse.store</groupId>
+			<artifactId>storage-embedded-configuration</artifactId>
+			<version>1.3.1</version>
 		</dependency>
 	</dependencies>
 
@@ -105,7 +105,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<!-- Uncomment to enable incremental compilation -->
-					<!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+					<!--
+					<useIncrementalCompilation>false</useIncrementalCompilation> -->
 
 					<annotationProcessorPaths
 						combine.children="append">
@@ -117,7 +118,8 @@
 					</annotationProcessorPaths>
 					<compilerArgs>
 						<arg>-Amicronaut.processing.group=one.microstream</arg>
-						<arg>-Amicronaut.processing.module=MSTraining_MicrostreamConfiguration</arg>
+						<arg>
+							-Amicronaut.processing.module=MSTraining_MicrostreamConfiguration</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
