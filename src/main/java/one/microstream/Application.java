@@ -1,8 +1,8 @@
 package one.microstream;
 
-import io.micronaut.runtime.Micronaut;
-import one.microstream.storage.embedded.types.EmbeddedStorageManager;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
 
+import io.micronaut.runtime.Micronaut;
 
 public class Application
 {
