@@ -1,3 +1,7 @@
 micronaut:
   application:
     name: MSTraining_MicrostreamConfiguration
+storage:
+  path: db
+  backuppath: db_backup
+  channels: 2

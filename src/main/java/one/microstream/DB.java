@@ -14,29 +14,36 @@ import org.eclipse.store.storage.types.StorageBackupSetup;
 import org.eclipse.store.storage.types.StorageChannelCountProvider;
 import org.eclipse.store.storage.types.StorageConfiguration;
 
+import io.micronaut.context.annotation.Value;
 import io.micronaut.core.io.ResourceResolver;
 import io.micronaut.core.io.scan.ClassPathResourceLoader;
+import jakarta.inject.Singleton;
 
 
+@Singleton
 public class DB
 {
-	public static EmbeddedStorageManager	storageManager_1;
-	public final static DataRoot			root_1	= new DataRoot();
-	public static EmbeddedStorageManager	storageManager_2;
-	public final static DataRoot			root_2	= new DataRoot();
-	public static EmbeddedStorageManager	storageManager_3;
-	public final static DataRoot			root_3	= new DataRoot();
-	public static EmbeddedStorageManager	storageManager_4;
-	public final static DataRoot			root_4	= new DataRoot();
+	@Value("${storage.path}") private String		path;
+	@Value("${storage.backuppath}") private String	path_backup;
+	@Value("${storage.channels}") private Integer	channel;
 	
-	public static void initializeShortStorage()
+	public EmbeddedStorageManager					storageManager_1;
+	public final DataRoot							root_1	= new DataRoot();
+	public EmbeddedStorageManager					storageManager_2;
+	public final DataRoot							root_2	= new DataRoot();
+	public EmbeddedStorageManager					storageManager_3;
+	public final DataRoot							root_3	= new DataRoot();
+	public EmbeddedStorageManager					storageManager_4;
+	public final DataRoot							root_4	= new DataRoot();
+	
+	public void initializeShortStorage()
 	{
 		storageManager_1 = EmbeddedStorage.start(
 			root_1,
 			Paths.get("shortStorage"));
 	}
 	
-	public static void initializeXMLStorage()
+	public void initializeXMLStorage()
 	{
 		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
 		Optional<URL> resource = loader.getResource("microstream.xml");
@@ -45,15 +52,14 @@ public class DB
 			resource.get().getPath()).createEmbeddedStorageFoundation().createEmbeddedStorageManager(root_2).start();
 	}
 	
-	
-	public static void initializeBuilderStorage()
+	public void initializeBuilderStorage()
 	{
 		// @formatter:off
 		
 		storageManager_3 = EmbeddedStorageConfiguration.Builder()
-			.setStorageDirectory("builderStorage")
-			.setBackupDirectory("builderStorage/backup")
-			.setChannelCount(4)
+			.setStorageDirectory(path)
+			.setBackupDirectory(path_backup)
+			.setChannelCount(channel)
 			.createEmbeddedStorageFoundation()
 			.setRoot(root_3)
 			.createEmbeddedStorageManager().start();
@@ -61,7 +67,7 @@ public class DB
 		// @formatter:on 
 	}
 	
-	public static void initializeFoundationStorage()
+	public void initializeFoundationStorage()
 	{
 		// @formatter:off
 		
@@ -86,11 +92,4 @@ public class DB
 		// @formatter:on 
 	}
 	
-	static
-	{
-		initializeXMLStorage();
-		initializeShortStorage();
-		initializeBuilderStorage();
-		initializeFoundationStorage();
-	}
 }
