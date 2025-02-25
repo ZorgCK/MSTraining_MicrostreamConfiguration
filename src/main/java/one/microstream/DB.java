@@ -2,47 +2,45 @@ package one.microstream;
 
 import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
 
+import io.micronaut.context.annotation.Value;
+
 
 public class DB
 {
-	public static EmbeddedStorageManager	storageManager_1;
-	public final static DataRoot			root_1	= new DataRoot();
-	public static EmbeddedStorageManager	storageManager_2;
-	public final static DataRoot			root_2	= new DataRoot();
-	public static EmbeddedStorageManager	storageManager_3;
-	public final static DataRoot			root_3	= new DataRoot();
-	public static EmbeddedStorageManager	storageManager_4;
-	public final static DataRoot			root_4	= new DataRoot();
+	@Value("${storage.path}") private String		path;
+	@Value("${storage.backuppath}") private String	path_backup;
+	@Value("${storage.channels}") private Integer	channel;
 	
-	public static void initializeShortStorage()
+	public EmbeddedStorageManager					storageManager_1;
+	public final DataRoot							root_1	= new DataRoot();
+	public EmbeddedStorageManager					storageManager_2;
+	public final DataRoot							root_2	= new DataRoot();
+	public EmbeddedStorageManager					storageManager_3;
+	public final DataRoot							root_3	= new DataRoot();
+	public EmbeddedStorageManager					storageManager_4;
+	public final DataRoot							root_4	= new DataRoot();
+	
+	public void initializeShortStorage()
 	{
 		
 	}
 	
-	public static void initializeXMLStorage()
+	public void initializeXMLStorage()
 	{
-
+		
 	}
 	
-	public static void initializeBuilderStorage()
+	public void initializeBuilderStorage()
 	{
 		// @formatter:off
 		
 		// @formatter:on 
 	}
 	
-	public static void initializeFoundationStorage()
+	public void initializeFoundationStorage()
 	{
 		// @formatter:off
 				
 		// @formatter:on 
-	}
-	
-	static
-	{
-		initializeShortStorage();
-		initializeXMLStorage();
-		initializeBuilderStorage();
-		initializeFoundationStorage();
 	}
 }
